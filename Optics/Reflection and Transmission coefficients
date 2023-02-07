@@ -1,0 +1,24 @@
+clear all
+n = 1.33
+theta = linspace(0,0.5*pi,100);
+for x=1:length(theta)
+    r_TE(x) = (cos(theta(x))-sqrt(n^2-(sin(theta(x))^2)))/(cos(theta(x))+sqrt(n^2-(sin(theta(x))^2)));
+
+    r_TM(x) = (-n^2*cos(theta(x))+sqrt(n^2-(sin(theta(x))^2)))/(n^2*cos(theta(x))+sqrt(n^2-(sin(theta(x))^2)));
+
+    t_TE(x) = (2*cos(theta(x)))/(cos(theta(x))+sqrt(n^2-(sin(theta(x))^2)));
+
+    t_TM(x) = (2*n*cos(theta(x)))/(cos(theta(x))*n^2+sqrt(n^2-(sin(theta(x))^2)));
+end
+line = zeros(1,length(theta));
+theta=57.29*theta; % Conversion from rad to degree
+plot(theta,r_TE,'LineWidth',1.3)
+hold on
+plot(theta,r_TM,'LineWidth',1.3)
+plot(theta,t_TE,'LineWidth',1.3)
+plot(theta,t_TM,'LineWidth',1.3)
+plot(theta,line,'--k')
+legend('r_T_E','r_T_M','t_T_E','t_T_M')
+title('Reflection & Transmission coefficients with n=1.33')
+xlabel('Angle [degrees]')
+hold off
