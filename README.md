@@ -1,3 +1,3 @@
 # 4th Semester
 ## Optics
-[Reflection and Transmission coefficients](https://github.com/Lasseb200/4th-semester/blob/main/Optics/Reflection%20and%20Transmission%20coefficients)
+- [Reflection and Transmission coefficients](https://github.com/Lasseb200/4th-semester/blob/main/Optics/Reflection%20and%20Transmission%20coefficients)
