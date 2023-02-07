@@ -1,0 +1,32 @@
+clear all
+% External reflection
+n = 1.5;
+theta = linspace(0,pi/2,100);
+for x=1:length(theta)
+    r_TE(x) = (cos(theta(x))-sqrt(n^2-(sin(theta(x))^2)))/(cos(theta(x))+sqrt(n^2-(sin(theta(x))^2)));
+
+    r_TM(x) = (-n^2*cos(theta(x))+sqrt(n^2-(sin(theta(x))^2)))/(n^2*cos(theta(x))+sqrt(n^2-(sin(theta(x))^2)));
+end
+R_TE_ex = r_TE.^2;
+R_TM_ex = r_TM.^2;
+
+% Internal reflection
+n = 2/3;
+clear r_TE r_TM
+for x=1:length(theta)
+    r_TE(x) = (cos(theta(x))-sqrt(n^2-(sin(theta(x))^2)))/(cos(theta(x))+sqrt(n^2-(sin(theta(x))^2)));
+
+    r_TM(x) = (-n^2*cos(theta(x))+sqrt(n^2-(sin(theta(x))^2)))/(n^2*cos(theta(x))+sqrt(n^2-(sin(theta(x))^2)));
+end
+R_TE_in = r_TE.^2;
+R_TM_in = r_TM.^2;
+
+plot(theta,R_TE_ex,'LineWidth',1.3)
+hold on
+plot(theta,R_TM_ex,'LineWidth',1.3)
+plot(theta,R_TE_in,'LineWidth',1.3)
+plot(theta,R_TM_in,'LineWidth',1.3)
+legend('R_T_E external','R_T_M external','R_T_E internal','R_T_M internal')
+title('External and Internal reflection with n_1=1 and n_2=1.5')
+xlabel('Angle [degrees]')
+hold off
