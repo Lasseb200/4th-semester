@@ -21,7 +21,7 @@ end
 R_TE_in = r_TE.^2;
 R_TM_in = r_TM.^2;
 
-theta=57.29*theta; % Conversion from rad to degree
+theta=57.2957795*theta; % Conversion from rad to degree
 plot(theta,R_TE_ex,'LineWidth',1.3)
 hold on
 plot(theta,R_TM_ex,'LineWidth',1.3)
