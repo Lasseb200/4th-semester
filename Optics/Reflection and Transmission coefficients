@@ -11,7 +11,7 @@ for x=1:length(theta)
     t_TM(x) = (2*n*cos(theta(x)))/(cos(theta(x))*n^2+sqrt(n^2-(sin(theta(x))^2)));
 end
 line = zeros(1,length(theta));
-theta=57.29*theta; % Conversion from rad to degree
+theta=57.2957795*theta; % Conversion from rad to degree
 plot(theta,r_TE,'LineWidth',1.3)
 hold on
 plot(theta,r_TM,'LineWidth',1.3)
