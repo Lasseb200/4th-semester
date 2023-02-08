@@ -11,7 +11,7 @@ R_TE_ex = r_TE.^2;
 R_TM_ex = r_TM.^2;
 
 % Internal reflection
-n = 2/3;
+n = 1/n;
 clear r_TE r_TM
 for x=1:length(theta)
     r_TE(x) = (cos(theta(x))-sqrt(n^2-(sin(theta(x))^2)))/(cos(theta(x))+sqrt(n^2-(sin(theta(x))^2)));
