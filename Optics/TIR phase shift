@@ -25,5 +25,5 @@ plot(theta*deg,real(shift_TM),'--g',"LineWidth",1.)
 legend('\phi_s','\phi_p')
 title('Phase shift')
 yticks([-pi -pi/2 0 pi/2 pi])
-yticklabels({'-pi','\pi/2','0','\pi/2','\pi'})
+yticklabels({'-\pi','\pi/2','0','\pi/2','\pi'})
 hold off
