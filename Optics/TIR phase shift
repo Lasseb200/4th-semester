@@ -1,0 +1,29 @@
+clear all
+n = 1/1.5;
+deg = rad2deg(1);
+theta = linspace(0,pi/2,91);
+
+for x=1:length(theta)
+    r_TE(x) = (cos(theta(x))-sqrt(n^2-(sin(theta(x))^2)))/(cos(theta(x))+sqrt(n^2-(sin(theta(x))^2)));
+
+    r_TM(x) = (-n^2*cos(theta(x))+sqrt(n^2-(sin(theta(x))^2)))/(n^2*cos(theta(x))+sqrt(n^2-(sin(theta(x))^2)));
+end
+for x=1:length(theta)
+    shift_TE(x) = 2*atan((-sqrt((sin(theta(x)))^2-n^2)/(cos(theta(x)))));
+    if shift_TE(x) >= 2*pi
+         shift_TE(x) = shift_TE(x)-2*pi;
+    end
+
+    shift_TM(x) = 2*atan((-sqrt((sin(theta(x)))^2-n^2)/((n^2)*cos(theta(x)))))+pi;
+    if shift_TM(x) >= 2*pi
+         shift_TM(x) = shift_TM(x)-2*pi;
+    end
+end
+plot(theta*deg,real(shift_TE),'r',"LineWidth",1.3)
+hold on
+plot(theta*deg,real(shift_TM),'--g',"LineWidth",1.)
+legend('\phi_s','\phi_p')
+title('Phase shift')
+yticks([-pi -pi/2 0 pi/2 pi])
+yticklabels({'-pi','\pi/2','0','\pi/2','\pi'})
+hold off
