@@ -1,0 +1,23 @@
+clear all
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Thick Lens
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Values
+n_1 = 1;
+n_2 = 1.33;
+n_L = 1.6;
+R_1 = 40;
+R_2 = -R_1;
+t = 5;
+
+% Focal lengths
+f_1 = ((n_L-n_2)/(n_1*R_2)-(n_L-n_1)/(n_1*R_1)-(((n_L-n_1)*(n_L-n_2))/(n_1*n_L))*t/(R_1*R_2))^(-1)
+
+f_2 = -(n_2/n_1)*f_1
+
+% r and s   (negative => directed left,   positive => directed right)
+r = ((n_L-n_2)/(n_L*R_2))*f_1*t
+
+s = -((n_L-n_1)/(n_L*R_1))*f_2*t
