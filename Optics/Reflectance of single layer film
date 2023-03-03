@@ -48,15 +48,15 @@ for x = 1:length(wl)
     g(x) = lambda_0/(wl(x));
 end
 
-if xxx==1;
+if xxx==1
     R_p_0 = R_p;
     R_s_0 = R_s;
 end
-if xxx==2;
+if xxx==2
     R_p_30 = R_p;
     R_s_30 = R_s;
 end
-if xxx==3;
+if xxx==3
     R_p_60 = R_p;
     R_s_60 = R_s;
 end
