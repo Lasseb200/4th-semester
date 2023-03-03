@@ -1,0 +1,112 @@
+clear all
+
+theta = 0;
+lambda_0 = 460;
+n_i = 1;
+n_L = 1.38;
+n_H = 2.3;
+n_f = 1.52;
+
+
+%%%% INTERFACES %%%%
+
+% Air to L:
+n_iL = n_L/n_i;
+t_iL = 2/(1+n_iL);
+r_iL = (1-n_iL)/(1+n_iL);
+H_iL = (1/t_iL)*[1 r_iL;r_iL 1];
+
+% L to H:
+n_LH = n_H/n_L;
+t_LH = 2/(1+n_LH);
+r_LH = (1-n_LH)/(1+n_LH);
+H_LH = (1/t_LH)*[1 r_LH;r_LH 1];
+
+% H to L:
+n_HL = n_L/n_H;
+t_HL = 2/(1+n_HL);
+r_HL = (1-n_HL)/(1+n_HL);
+H_HL = (1/t_HL)*[1 r_HL;r_HL 1];
+
+% H to f:
+n_Hf = n_f/n_H;
+t_Hf = 2/(1+n_Hf);
+r_Hf = (1-n_Hf)/(1+n_Hf);
+H_Hf = (1/t_Hf)*[1 r_Hf;r_Hf 1];
+
+%theta = deg2rad(theta);
+
+%theta_2 = asin((n_0/n_1)*sin(theta));
+
+
+
+%wl = linspace(lambda_0/0.7,lambda_0/1.3,100);
+wl = linspace(200,800,300);
+
+for x = 1:length(wl)
+    k_0 = (2*pi)/(wl(x));
+    %%%% Layers %%%%
+
+    % L:
+    d_L = lambda_0/(4*n_L);
+    beta_L = k_0*n_L*d_L;
+    L_L = [exp(-1i*beta_L), 0;0, exp(1i*beta_L)];
+
+    % H:
+    d_H = lambda_0/(4*n_H);
+    beta_H = k_0*n_H*d_H;
+    L_H = [exp(-1i*beta_H), 0;0, exp(1i*beta_H)];
+
+S_3 = H_iL*...
+        ...
+        L_L*H_LH*L_H*H_HL*...
+        L_L*H_LH*L_H*H_HL*...
+        ...
+        L_L*H_LH*L_H*H_Hf;
+
+    r_3 = (S_3(1,2))/(S_3(2,2));
+    R_3(x) = (abs(r_3))^2;
+
+S_5 = H_iL*...
+        ...
+        L_L*H_LH*L_H*H_HL*...
+        L_L*H_LH*L_H*H_HL*...
+        L_L*H_LH*L_H*H_HL*...
+        L_L*H_LH*L_H*H_HL*...
+        ...
+        L_L*H_LH*L_H*H_Hf;
+
+    r_5 = (S_5(1,2))/(S_5(2,2));
+    R_5(x) = (abs(r_5))^2;
+
+
+    S_9 = H_iL*...
+        ...
+        L_L*H_LH*L_H*H_HL*...
+        L_L*H_LH*L_H*H_HL*...
+        L_L*H_LH*L_H*H_HL*...
+        L_L*H_LH*L_H*H_HL*...
+        L_L*H_LH*L_H*H_HL*...
+        L_L*H_LH*L_H*H_HL*...
+        L_L*H_LH*L_H*H_HL*...
+        L_L*H_LH*L_H*H_HL*...
+        ...
+        L_L*H_LH*L_H*H_Hf;
+
+    r_9 = (S_9(1,2))/(S_9(2,2));
+    R_9(x) = (abs(r_9))^2;
+end
+
+plot(wl,R_3*100,'LineWidth',1.3)
+hold on
+plot(wl,R_5*100,'LineWidth',1.3)
+plot(wl,R_9*100,'LineWidth',1.3)
+legend('3','5','9')
+xlim([200 800])
+ylim([0 109])
+leg = legend('show');
+title(leg,'Layers')
+ylabel('Reflectance (%)')
+xlabel('Wavelength (nm)')
+title('Reflectance of multilayer coating at normal incidence')
+hold off
